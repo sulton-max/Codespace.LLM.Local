@@ -1,14 +1,20 @@
-using Azure.Core;
-using Azure.Core.Pipeline;
+using System.ClientModel.Primitives;
 
 namespace Models.Inferencing;
 
-internal partial class OverrideRequestUriPolicy(Uri overrideUri) : HttpPipelineSynchronousPolicy
+public class OverrideRequestUriPolicy(Uri overrideUri) : PipelinePolicy
 {
-    private readonly Uri _overrideUri = overrideUri;
-
-    public override void OnSendingRequest(HttpMessage message)
+    public override void Process(PipelineMessage message, IReadOnlyList<PipelinePolicy> pipeline, int currentIndex)
     {
-        message.Request.Uri.Reset(_overrideUri);
+        ArgumentNullException.ThrowIfNull(message);
+        message.Request.Uri = overrideUri;
+        ProcessNext(message, pipeline, currentIndex);
+    }
+
+    public override async ValueTask ProcessAsync(PipelineMessage message, IReadOnlyList<PipelinePolicy> pipeline, int currentIndex)
+    {
+        ArgumentNullException.ThrowIfNull(message);
+        message.Request.Uri = overrideUri;
+        await ProcessNextAsync(message, pipeline, currentIndex).ConfigureAwait(false);
     }
 }

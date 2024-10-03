@@ -1,25 +1,17 @@
-﻿using Azure.AI.OpenAI;
+﻿using System.ClientModel;
+using System.ClientModel.Primitives;
+using AiCapabilities.Providers.OpenAi.Capabilities.ChatCompletion.Extensions;
 using Models.Inferencing;
+using OpenAI;
+using OpenAI.Chat;
 
 var localhostUri = new Uri("http://localhost:5272/v1/chat/completions");
 
 OpenAIClientOptions clientOptions = new();
-clientOptions.AddPolicy(
-    new OverrideRequestUriPolicy(localhostUri),
-    Azure.Core.HttpPipelinePosition.BeforeTransport);
-OpenAIClient client = new(openAIApiKey: "unused", clientOptions);
+clientOptions.AddPolicy(new OverrideRequestUriPolicy(localhostUri), PipelinePosition.BeforeTransport);
 
-ChatCompletionsOptions options = new()
-{
-    DeploymentName = "Phi-3-mini-128k-cpu-int4-rtn-block-32-onnx",
-    Messages =
-    {
-        new ChatRequestSystemMessage("You are a helpful assistant. Be brief and succinct."),
-        new ChatRequestUserMessage("What is the golden ratio?"),
-    }
-};
+var client = new OpenAIClient(new ApiKeyCredential("unused"), clientOptions);
 
-var response = await client.GetChatCompletionsAsync(options);
-var result = response.GetRawResponse();
-
-Console.WriteLine(result);
+var chatClient = client.GetChatClient("Phi-3-mini-128k-cpu-int4-rtn-block-32-onnx");
+var resultA = await chatClient.CompleteChatAsync(new UserChatMessage("What is the golden ratio?"));
+Console.WriteLine(resultA.Value.Content.GetResult());
