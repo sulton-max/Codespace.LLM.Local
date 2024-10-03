@@ -1,8 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inferencing", "Inferencing", "{1F0C06B3-7435-4304-A44A-B8BA79A2B99F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FineTuning", "FineTuning", "{FD2CA86C-554C-4B0A-8FF2-124753B4F8CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.Inferencing", "Models.Inferencing\Models.Inferencing.csproj", "{7F9708C7-02A9-47B8-A1C5-5684E8CDC27A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F9708C7-02A9-47B8-A1C5-5684E8CDC27A} = {1F0C06B3-7435-4304-A44A-B8BA79A2B99F}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F9708C7-02A9-47B8-A1C5-5684E8CDC27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F9708C7-02A9-47B8-A1C5-5684E8CDC27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F9708C7-02A9-47B8-A1C5-5684E8CDC27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F9708C7-02A9-47B8-A1C5-5684E8CDC27A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
