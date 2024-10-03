@@ -1,6 +1,6 @@
 using System.ClientModel.Primitives;
 
-namespace Models.Inferencing;
+namespace Models.Inferencing.Interceptors;
 
 public class OverrideRequestUriPolicy(Uri overrideUri) : PipelinePolicy
 {

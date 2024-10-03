@@ -1,7 +1,8 @@
 ﻿using System.ClientModel;
 using System.ClientModel.Primitives;
-using AiCapabilities.Providers.OpenAi.Capabilities.ChatCompletion.Extensions;
 using Models.Inferencing;
+using Models.Inferencing.Extensions;
+using Models.Inferencing.Interceptors;
 using OpenAI;
 using OpenAI.Chat;
 
